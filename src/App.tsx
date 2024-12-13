@@ -1,11 +1,16 @@
 import * as React from 'react';
 import './App.css'
-import { Button } from './components/ui/button'
+import AppRoute from './route/AppRoute';
+import Header from './components/Header';
 
 function App() {
-
   return (
-    <Button>click me</Button>
+    <React.Fragment>
+      <Header />
+      <section className='py-4'>
+        <AppRoute />
+      </section>
+    </React.Fragment>
   )
 }
 
