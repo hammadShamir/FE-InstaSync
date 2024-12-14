@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from "@/components/ui/button"
 import { Menu, X } from 'lucide-react'
 
 export default function Header() {
+    const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = React.useState(false)
     const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
     const handleAuthClick = () => {
-        setIsLoggedIn(!isLoggedIn)
         if (isMenuOpen) setIsMenuOpen(false)
+        navigate('/login')
     }
 
     const toggleMenu = () => {
@@ -17,6 +18,7 @@ export default function Header() {
     }
 
     React.useEffect(() => {
+        setIsLoggedIn(false)
         if (isMenuOpen) {
             document.body.style.overflow = 'hidden'
         } else {
