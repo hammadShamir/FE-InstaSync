@@ -15,7 +15,7 @@ const request = async (
             data,
             ...config,
         });
-        return { data: response.data.data, meta: response.data.meta };
+        return response.data.data;
     }
 
     // Use toast.promise for other methods

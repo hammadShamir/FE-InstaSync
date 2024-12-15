@@ -3,6 +3,7 @@ import { routePath } from "./routePath";
 import { RouteConfig } from "../utils/Interfaces/appTypes";
 import Home from '../Screens/Home/Home';
 import SignUp from '../Screens/Auth/SignUp';
+import { UploadPost } from "../Screens/Post/addPost";
 
 const routeConfig = (): RouteConfig[] => {
   return [
@@ -20,6 +21,11 @@ const routeConfig = (): RouteConfig[] => {
       path: routePath.signup,
       component: <SignUp />,
       isPrivate: false,
+    },
+    {
+      path: routePath.uploadPost,
+      component: <UploadPost />,
+      isPrivate: true,
     },
   ];
 };

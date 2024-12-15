@@ -12,7 +12,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { routePath } from '../../route/routePath'
 import { registerUser } from '../../Services/APIs/auth'
 
-
 export default function SignUp() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -35,7 +34,7 @@ export default function SignUp() {
             setIsLoading(true);
             const result = await registerUser(values)
             if (result) {
-                navigate('/login')
+                navigate(routePath.login)
             }
         } finally {
             setIsLoading(false)

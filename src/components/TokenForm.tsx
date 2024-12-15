@@ -22,22 +22,25 @@ import {
 } from "../components/ui/form"
 import { Input } from "../components/ui/input"
 import { tokenFormValues, tokenSchema } from "../utils/schemas/Post"
+import { uploadToken } from "../Services/APIs/post"
 
-
-export function TokenForm() {
+export function TokenForm({ onSuccess }: { onSuccess: () => void }) {
     const [isLoading, setIsLoading] = useState(false)
 
     const form = useForm<tokenFormValues>({
         resolver: zodResolver(tokenSchema),
         defaultValues: {
-            token: "",
+            access_token: "",
         },
     })
 
-    function onSubmit(values: tokenFormValues) {
+    async function onSubmit(values: tokenFormValues) {
         try {
             setIsLoading(true)
-            console.log(values)
+            const res = await uploadToken(values);
+            if (res) {
+                onSuccess();
+            }
         } finally {
             setIsLoading(false)
         }
@@ -58,7 +61,7 @@ export function TokenForm() {
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <FormField
                                 control={form.control}
-                                name="token"
+                                name="access_token"
                                 render={({ field }) => (
                                     <FormItem className="text-left">
                                         <FormLabel>Token</FormLabel>

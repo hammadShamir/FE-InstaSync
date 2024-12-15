@@ -1,11 +1,10 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import RouteConfig from "./routeConfig";
 import PrivateRoute from "./PrivateRoute";
-import PublicRoute from "./PublicRoute";
+import { checkAuth } from "../Services/helpers/helpers";
 
 const AppRoutes = () => {
-  const isAuthenticated = true;
-  console.log(isAuthenticated)
+  const isAuthenticated = !!checkAuth;
 
   const renderRoutes = (routes: ReturnType<typeof RouteConfig>) => {
     return routes.map((route) => (
@@ -17,10 +16,6 @@ const AppRoutes = () => {
             <PrivateRoute route={route.path} isAuthenticated={isAuthenticated}>
               {route.component}
             </PrivateRoute>
-          ) : route.isPublic ? (
-            <PublicRoute isAuthenticated={isAuthenticated}>
-              {route.component}
-            </PublicRoute>
           ) : (
             route.component
           )
