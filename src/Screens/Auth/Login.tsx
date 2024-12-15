@@ -31,7 +31,7 @@ export default function LoginPage() {
             setIsLoading(true)
             const res = await loginUser(values);
             if (res) {
-                navigate('/')
+                navigate(routePath.home)
             }
         } finally {
             setIsLoading(false)

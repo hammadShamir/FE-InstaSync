@@ -13,7 +13,8 @@ export const loginUser = async (payload: loginFormValues) => {
         const user = {
             id: res.id,
             fullName: res.fullName,
-            email: res.email
+            email: res.email,
+            metaToken: true
         }
         localStorage.setItem('token', res.token)
         localStorage.setItem('user', JSON.stringify(user));

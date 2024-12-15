@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button } from "../components/ui/button";
 import { Menu, X } from 'lucide-react'
 import { checkAuth } from '../Services/helpers/helpers';
+import { routePath } from '../route/routePath';
 
 export default function Header() {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ export default function Header() {
 
     const handleAuthClick = () => {
         if (isMenuOpen) setIsMenuOpen(false)
-        navigate('/login')
+        navigate(routePath.login)
     }
 
     const toggleMenu = () => {

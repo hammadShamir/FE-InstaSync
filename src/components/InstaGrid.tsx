@@ -21,17 +21,52 @@ import {
     DialogContent,
     DialogTrigger,
 } from "../components/ui/dialog"
-import { InstagramGridProps } from "../utils/Interfaces/post"
 
+const posts = [
+    {
+        id: "1",
+        username: "johndoe",
+        userImage: "/placeholder-user.jpg",
+        image: "https://plus.unsplash.com/premium_photo-1666901328734-3c6eb9b6b979?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmFuZG9tfGVufDB8fDB8fHww",
+        caption: "Beautiful sunset at the beach! 🌅",
+        likes: 1234,
+        comments: 56,
+    },
+    {
+        id: "2",
+        username: "janedoe",
+        userImage: "/placeholder-user.jpg",
+        image: "https://plus.unsplash.com/premium_photo-1664303228186-a61e7dc91597?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cmFuZG9tfGVufDB8fDB8fHww",
+        caption: "Perfect morning coffee ☕️",
+        likes: 987,
+        comments: 43,
+    },
+    {
+        id: "3",
+        username: "photography",
+        userImage: "/placeholder-user.jpg",
+        image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHJhbmRvbXxlbnwwfHwwfHx8MA%3D%3D",
+        caption: "City lights 🌃",
+        likes: 2468,
+        comments: 89,
+    },
+    {
+        id: "3",
+        username: "photography",
+        userImage: "/placeholder-user.jpg",
+        image: "https://images.unsplash.com/photo-1508138221679-760a23a2285b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHJhbmRvbXxlbnwwfHwwfHx8MA%3D%3D",
+        caption: "City lights 🌃",
+        likes: 2468,
+        comments: 89,
+    },
+]
 
-
-
-export function InstagramGrid({ posts, className }: InstagramGridProps) {
+export function InstagramGrid() {
     const [selectedImage, setSelectedImage] = React.useState<string | null>(null)
 
     return (
         <>
-            <div className={cn("grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4", className)}>
+            <div className={cn("grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4")}>
                 {posts.map((post) => (
                     <Card key={post.id} className="overflow-hidden">
                         <CardHeader className="flex flex-row items-center space-x-4 p-4">

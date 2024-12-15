@@ -1,6 +1,6 @@
 
 export const routePath = {
-    home: "/",
-    login: "/login",
+    home: "/home",
+    login: "/",
     signup: "/signup",
 }

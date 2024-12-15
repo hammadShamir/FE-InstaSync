@@ -22,9 +22,6 @@ const signUpSchema = z.object({
 
 type signUpFormValues = z.infer<typeof signUpSchema>
 
-
-
-
 export {
     LoginSchema, signUpSchema
 };
