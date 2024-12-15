@@ -1,4 +1,4 @@
-import { InstagramGrid } from '@/components/InstaGrid'
+import { InstagramGrid } from '../../components/InstaGrid'
 import * as React from 'react'
 
 const Home = () => {

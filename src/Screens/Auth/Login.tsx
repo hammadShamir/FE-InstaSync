@@ -2,18 +2,21 @@
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card"
+import { Input } from "../../components/ui/input"
+import { Button } from "../../components/ui/button"
 import { EyeIcon, EyeOffIcon } from 'lucide-react'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { loginFormValues, LoginSchema } from '@/utils/schemas/Auth'
-import { Link } from 'react-router-dom'
-import { routePath } from '@/route/routePath'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../components/ui/form"
+import { loginFormValues, LoginSchema } from '../../utils/schemas/Auth'
+import { Link, useNavigate } from 'react-router-dom'
+import { routePath } from '../../route/routePath'
+import { loginUser } from '../../Services/APIs/auth'
 
 
 export default function LoginPage() {
-    const [showPassword, setShowPassword] = React.useState(false)
+    const [isLoading, setIsLoading] = React.useState<boolean>(false);
+    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = React.useState<boolean>(false)
 
     const form = useForm<loginFormValues>({
         resolver: zodResolver(LoginSchema),
@@ -23,8 +26,16 @@ export default function LoginPage() {
         },
     })
 
-    function onSubmit(values: loginFormValues) {
-        console.log(values)
+    async function onSubmit(values: loginFormValues) {
+        try {
+            setIsLoading(true)
+            const res = await loginUser(values);
+            if (res) {
+                navigate('/')
+            }
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -103,7 +114,9 @@ export default function LoginPage() {
                             />
                         </CardContent>
                         <CardFooter className="flex flex-col space-y-4">
-                            <Button type="submit" className="w-full">Sign In</Button>
+                            <Button type="submit" className="w-full" disabled={isLoading}>
+                                {isLoading ? "Signing in" : "Sign In"}
+                            </Button>
                             <div className="text-sm text-center text-gray-500">
                                 Don't have an account?{" "}
                                 <Link to={routePath.signup} className="text-primary hover:underline">

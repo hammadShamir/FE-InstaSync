@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import { Button } from "@/components/ui/button"
+import { Button } from "../components/ui/button";
 import { Menu, X } from 'lucide-react'
+import { checkAuth } from '../Services/helpers/helpers';
 
 export default function Header() {
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false)
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+    const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false)
+    const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false)
 
     const handleAuthClick = () => {
         if (isMenuOpen) setIsMenuOpen(false)
@@ -18,13 +19,16 @@ export default function Header() {
     }
 
     React.useEffect(() => {
-        setIsLoggedIn(false)
         if (isMenuOpen) {
             document.body.style.overflow = 'hidden'
         } else {
             document.body.style.overflow = 'unset'
         }
     }, [isMenuOpen])
+
+    React.useEffect(() => {
+        setIsLoggedIn(!!checkAuth())
+    }, [checkAuth()])
 
     const NavLinks = () => (
         <>
@@ -40,6 +44,10 @@ export default function Header() {
         </>
     )
 
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        localStorage.clear();
+    };
     return (
         <header className="bg-white shadow-sm relative z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,9 +61,17 @@ export default function Header() {
                         <NavLinks />
                     </nav>
                     <div className="hidden md:block">
-                        <Button onClick={handleAuthClick}>
-                            {isLoggedIn ? 'Logout' : 'Login'}
-                        </Button>
+                        {
+                            isLoggedIn ? (
+                                <Button onClick={handleLogout}>
+                                    Logout
+                                </Button>
+                            ) : (
+                                <Button onClick={handleAuthClick}>
+                                    Login
+                                </Button>
+                            )
+                        }
                     </div>
                     <div className="md:hidden">
                         <Button variant="ghost" size="icon" onClick={toggleMenu}>
@@ -75,9 +91,17 @@ export default function Header() {
                         <NavLinks />
                     </nav>
                     <div className="mt-auto p-4">
-                        <Button onClick={handleAuthClick} className="w-full">
-                            {isLoggedIn ? 'Logout' : 'Login'}
-                        </Button>
+                        {
+                            isLoggedIn ? (
+                                <Button onClick={handleLogout}>
+                                    Logout
+                                </Button>
+                            ) : (
+                                <Button onClick={handleAuthClick}>
+                                    Login
+                                </Button>
+                            )
+                        }
                     </div>
                 </div>
             </div>

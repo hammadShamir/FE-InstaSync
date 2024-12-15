@@ -39,7 +39,7 @@ const request = async (
         }
     ).then((response) => {
         // Return response data directly
-        return { data: response.data.data, meta: response.data.meta };
+        return response.data.data;
     });
 };
 

@@ -1,20 +1,23 @@
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card"
+import { Input } from "../../components/ui/input"
+import { Button } from "../../components/ui/button"
 import { EyeIcon, EyeOffIcon } from 'lucide-react'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Checkbox } from "@/components/ui/checkbox"
-import { signUpFormValues, signUpSchema } from '@/utils/schemas/Auth'
-import { Link } from 'react-router-dom'
-import { routePath } from '@/route/routePath'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../components/ui/form"
+import { Checkbox } from "../../components/ui/checkbox"
+import { signUpFormValues, signUpSchema } from '../../utils/schemas/Auth'
+import { Link, useNavigate } from 'react-router-dom'
+import { routePath } from '../../route/routePath'
+import { registerUser } from '../../Services/APIs/auth'
 
 
 export default function SignUp() {
-    const [showPassword, setShowPassword] = React.useState(false)
-    const [showConfirmPassword, setShowConfirmPassword] = React.useState(false)
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = React.useState<boolean>(false);
+    const [showPassword, setShowPassword] = React.useState<boolean>(false)
+    const [showConfirmPassword, setShowConfirmPassword] = React.useState<boolean>(false)
 
     const form = useForm<signUpFormValues>({
         resolver: zodResolver(signUpSchema),
@@ -27,8 +30,16 @@ export default function SignUp() {
         },
     })
 
-    function onSubmit(values: signUpFormValues) {
-        console.log(values)
+    async function onSubmit(values: signUpFormValues) {
+        try {
+            setIsLoading(true);
+            const result = await registerUser(values)
+            if (result) {
+                navigate('/login')
+            }
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -161,7 +172,9 @@ export default function SignUp() {
                             />
                         </CardContent>
                         <CardFooter className="flex flex-col space-y-4">
-                            <Button type="submit" className="w-full">Sign Up</Button>
+                            <Button type="submit" className="w-full" disabled={isLoading}>
+                                {isLoading ? "Signing up" : "Sign Up"}
+                            </Button>
                             <div className="text-sm text-center text-gray-500">
                                 Already have an account?{" "}
                                 <Link to={routePath.login} className="text-primary hover:underline">
