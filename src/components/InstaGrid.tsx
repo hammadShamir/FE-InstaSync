@@ -1,27 +1,27 @@
 import * as React from "react"
 import { Heart, MessageCircle, Bookmark, MoreHorizontal, Send, X } from 'lucide-react'
 
-import { cn } from "@/lib/utils"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+import { cn } from "../lib/utils"
+import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
+import { Button } from "../components/ui/button"
 import {
     Card,
     CardContent,
     CardFooter,
     CardHeader,
-} from "@/components/ui/card"
+} from "../components/ui/card"
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "../components/ui/dropdown-menu"
 import {
     Dialog,
     DialogContent,
     DialogTrigger,
-} from "@/components/ui/dialog"
-import { InstagramGridProps } from "@/utils/Interfaces/post"
+} from "../components/ui/dialog"
+import { InstagramGridProps } from "../utils/Interfaces/post"
 
 
 

@@ -26,8 +26,6 @@ type signUpFormValues = z.infer<typeof signUpSchema>
 
 
 export {
-    LoginSchema,
-    loginFormValues,
-    signUpSchema,
-    signUpFormValues
-}
+    LoginSchema, signUpSchema
+};
+export type { loginFormValues, signUpFormValues };

@@ -1,6 +1,6 @@
 import { axiosService } from "../Axios/axiosRequest";
 import { APIsPath } from "./APIsPath";
-import { loginFormValues, signUpFormValues } from "@/utils/schemas/Auth";
+import { loginFormValues, signUpFormValues } from "../../utils/schemas/Auth";
 
 export const registerUser = async (payload: signUpFormValues) => {
     const res = await axiosService.post(APIsPath.AuthAPIs.signup, payload)

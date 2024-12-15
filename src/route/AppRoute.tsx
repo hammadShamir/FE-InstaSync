@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { Routes, Route } from "react-router-dom"
 import routeConfig from "./routeConfig"
-import { RouteConfig } from '@/utils/Interfaces/appTypes';
+import { RouteConfig } from '../utils/Interfaces/appTypes';
 
 const AppRoute = () => {
   const renderRoutes = (routes: RouteConfig[]) => {

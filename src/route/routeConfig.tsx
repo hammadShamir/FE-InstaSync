@@ -1,9 +1,8 @@
-import * as React from 'react';
-import Login from "@/Screens/Auth/Login";
+import Login from "../Screens/Auth/Login";
 import { routePath } from "./routePath";
-import { RouteConfig } from "@/utils/Interfaces/appTypes";
-import Home from '@/Screens/Home/Home';
-import SignUp from '@/Screens/Auth/SignUp';
+import { RouteConfig } from "../utils/Interfaces/appTypes";
+import Home from '../Screens/Home/Home';
+import SignUp from '../Screens/Auth/SignUp';
 
 const routeConfig = (): RouteConfig[] => {
   return [

@@ -1,9 +1,8 @@
 
-import * as React from 'react';
 import { useEffect } from 'react';
 import { routePath } from './routePath';
 import { useNavigate } from 'react-router-dom';
-import { PublicRouteProps } from '@/utils/Interfaces/appTypes';
+import { PublicRouteProps } from '../utils/Interfaces/appTypes';
 
 const PublicRoute: React.FC<PublicRouteProps> = ({ children, isAuthenticated }) => {
   const navigate = useNavigate();

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Route, Routes, Navigate } from "react-router-dom";
 import RouteConfig from "./routeConfig";
 import PrivateRoute from "./PrivateRoute";
